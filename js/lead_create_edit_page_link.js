@@ -122,14 +122,15 @@ for (var i = 0; i < layoutActivity.length; i++) {
 								} else {														
 									var addressComponents = layoutComponents[m].getArray("components");									
 									for(var p=0;p<addressComponents.length;p++){
+										var idVal = 'id_'+a[addressComponents[p].value];
+										if(idVal=='id_undefined'){
+											idVal = 'id_'+countUndefined;
+											countUndefined++;
+										}
 										if (layoutItems[l].required == 'true') {
 											divNum++;		
-											var idVal;									
-											idVal = 'id_'+a[addressComponents[p].value];
 											body += '\\n\\t\\t\\t\\t<apex:inputField id=\''+idVal+'\' value=\'\{\!Lead.' + addressComponents[p].value + '}\' required=\'' + layoutItems[l].required + '\' tabOrderHint=\'' + addressComponents[p].tabOrder + '\' onkeypress=\'noenter(event)\' styleClass=\'reqClass\'>\\n\\t\\t\\t\\t\\t<apex:actionSupport event=\'onkeyup\' rerender=\'pg\'/>\\n\\t\\t\\t\\t\\t<div id=\'div' + divNum + '\' style=\'color:#d74c3b;display:none;\' class=\'errorMsg\'>Error: You must enter a value</div>\\n\\t\\t\\t\\t</apex:inputField>\\n\\t\\t\\t\\t<apex:pageBlockSectionItem/>';
 										} else { 
-											var idVal;									
-											idVal = 'id_'+a[addressComponents[p].value];
 											body += '\\n\\t\\t\\t\\t<apex:inputField id=\''+idVal+'\' value=\'\{\!Lead.' + addressComponents[p].value + '}\' required=\'' + layoutItems[l].required + '\' tabOrderHint=\'' + addressComponents[p].tabOrder + '\' onkeypress=\'noenter(event)\'>\\n\\t\\t\\t\\t\\t<apex:actionSupport event=\'onkeyup\' rerender=\'pg\'/>\\n\\t\\t\\t\\t</apex:inputField>\\n\\t\\t\\t\\t<apex:pageBlockSectionItem/>';
 										}
 									}
