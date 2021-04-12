@@ -1,5 +1,5 @@
-{!REQUIRESCRIPT("/soap/ajax/39.0/connection.js")}
-{!REQUIRESCRIPT("/soap/ajax/39.0/apex.js")}
+{!REQUIRESCRIPT("/soap/ajax/51.0/connection.js")}
+{!REQUIRESCRIPT("/soap/ajax/51.0/apex.js")}
 var SesId = '{!GETSESSIONID()}';
 var result;
 var ObjectName = 'Contact';
@@ -85,6 +85,10 @@ for (var i = 0; i < layoutActivity.length; i++) {
 							var field = objectDescribeData.fields[n];
 							if (field.name == layoutComponents[m].value) {
 								var idVal = 'id_'+a[layoutItems[l].label];
+								if(idVal=='id_undefined'){
+									idVal = 'id_'+countUndefined;
+									countUndefined++;
+								}
 								if (layoutComponents[m].value != 'MailingAddress' && layoutComponents[m].value != 'OtherAddress') {
 									if (layoutComponents[m].value == 'Name') { 
 										divNum++; 
@@ -105,10 +109,6 @@ for (var i = 0; i < layoutActivity.length; i++) {
 													divNum++;
 													body += '\\n\\t\\t\\t\\t<apex:inputField id=\''+idVal+'\' value=\'\{\!Contact.' + layoutComponents[m].value + '}\' required=\'' + layoutItems[l].required + '\' tabOrderHint=\'' + layoutComponents[m].tabOrder + '\' onkeypress=\'noenter(event)\' styleClass=\'reqClass\'>\\n\\t\\t\\t\\t\\t<apex:actionSupport event=\'onkeyup\' rerender=\'pg\'/>\\n\\t\\t\\t\\t\\t<div id=\'div' + divNum + '\' style=\'color:#d74c3b;display:none;\' class=\'errorMsg\'>Error: You must enter a value</div>\\n\\t\\t\\t\\t</apex:inputField>';
 												} else {
-													if(idVal=='id_undefined'){
-														idVal = 'id_'+countUndefined;
-													}
-													countUndefined++;
 													body += '\\n\\t\\t\\t\\t<apex:inputField id=\''+idVal+'\' value=\'\{\!Contact.' + layoutComponents[m].value + '}\' required=\'' + layoutItems[l].required + '\' tabOrderHint=\'' + layoutComponents[m].tabOrder + '\' onkeypress=\'noenter(event)\'>\\n\\t\\t\\t\\t\\t<apex:actionSupport event=\'onkeyup\' rerender=\'pg\'/>\\n\\t\\t\\t\\t</apex:inputField>';
 												}
 											}
@@ -127,6 +127,10 @@ for (var i = 0; i < layoutActivity.length; i++) {
 											for(var p=0;p<addressComponents.length;p++){
 												var addrIdVal='';					
 												addrIdVal = 'id_'+a[addressComponents[p].value];
+												if(addrIdVal=='id_undefined'){
+													addrIdVal = 'idadd_'+countUndefined;
+													countUndefined++;
+												}
 												if (layoutItems[l].required == 'true') {
 													divNum++;													
 													body += '\\n\\t\\t\\t\\t<apex:inputField id=\''+addrIdVal+'\' value=\'\{\!Contact.' + addressComponents[p].value + '}\' required=\'' + layoutItems[l].required + '\' tabOrderHint=\'' + addressComponents[p].tabOrder + '\' onkeypress=\'noenter(event)\' styleClass=\'reqClass\'>\\n\\t\\t\\t\\t\\t<apex:actionSupport event=\'onkeyup\' rerender=\'pg\'/>\\n\\t\\t\\t\\t\\t<div id=\'div' + divNum + '\' style=\'color:#d74c3b;display:none;\' class=\'errorMsg\'>Error: You must enter a value</div>\\n\\t\\t\\t\\t</apex:inputField>\\n\\t\\t\\t\\t<apex:inputField value=\'\{\!Contact.' + addressTwoComponents[p].value + '}\' required=\'' + layoutItems[l+1].required + '\' tabOrderHint=\'' + addressTwoComponents[p].tabOrder + '\' onkeypress=\'noenter(event)\' styleClass=\'reqClass\'>\\n\\t\\t\\t\\t\\t<apex:actionSupport event=\'onkeyup\' rerender=\'pg\'/>\\n\\t\\t\\t\\t\\t<div id=\'div' + divNum + '\' style=\'color:#d74c3b;display:none;\' class=\'errorMsg\'>Error: You must enter a value</div>\\n\\t\\t\\t\\t</apex:inputField>';
@@ -141,6 +145,10 @@ for (var i = 0; i < layoutActivity.length; i++) {
 										for(var p=0;p<addressComponents.length;p++){
 											var addrIdVal;									
 											addrIdVal = 'id_'+a[addressComponents[p].value];
+											if(addrIdVal=='id_undefined'){
+												addrIdVal = 'idadd2_'+countUndefined;
+												countUndefined++;
+											}
 											if (layoutItems[l].required == 'true') {
 												divNum++;
 												body += '\\n\\t\\t\\t\\t<apex:inputField id=\''+addrIdVal+'\'  value=\'\{\!Contact.' + addressComponents[p].value + '}\' required=\'' + layoutItems[l].required + '\' tabOrderHint=\'' + addressComponents[p].tabOrder + '\' onkeypress=\'noenter(event)\' styleClass=\'reqClass\'>\\n\\t\\t\\t\\t\\t<apex:actionSupport event=\'onkeyup\' rerender=\'pg\'/>\\n\\t\\t\\t\\t\\t<div id=\'div' + divNum + '\' style=\'color:#d74c3b;display:none;\' class=\'errorMsg\'>Error: You must enter a value</div>\\n\\t\\t\\t\\t</apex:inputField><apex:pageBlockSectionItem/>';
