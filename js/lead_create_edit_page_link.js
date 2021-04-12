@@ -101,17 +101,15 @@ for (var i = 0; i < layoutActivity.length; i++) {
 											if (layoutComponents[m].value == 'OwnerId') {
 												body += '\\n\\t\\t\\t\\t<apex:outputText value=\'\{\!ownerName}\' label=\'Lead Owner\'/>';
 											} else {
+												var idVal = 'id_'+a[layoutItems[l].label];
+												if(idVal=='id_undefined'){
+													idVal = 'id_'+countUndefined;
+												}
+												countUndefined++;
 												if (layoutItems[l].required == 'true') {
 													divNum++;
-													var idVal = 'id_'+a[layoutItems[l].label];													
 													body += '\\n\\t\\t\\t\\t<apex:inputField id=\''+idVal+'\' value=\'\{\!Lead.' + layoutComponents[m].value + '}\' required=\'' + layoutItems[l].required + '\' tabOrderHint=\'' + layoutComponents[m].tabOrder + '\' onkeypress=\'noenter(event)\' styleClass=\'reqClass\'>\\n\\t\\t\\t\\t\\t<apex:actionSupport event=\'onkeyup\' rerender=\'pg\'/>\\n\\t\\t\\t\\t\\t<div id=\'div' + divNum + '\' style=\'color:#d74c3b;display:none;\' class=\'errorMsg\'>Error: You must enter a value</div>\\n\\t\\t\\t\\t</apex:inputField>';
 												} else {
-													var idVal;									
-													idVal = 'id_'+a[layoutItems[l].label];
-													if(idVal=='id_undefined'){
-														idVal = 'id_'+countUndefined;
-													}
-													countUndefined++;
 													body += '\\n\\t\\t\\t\\t<apex:inputField id=\''+idVal+'\' value=\'\{\!Lead.' + layoutComponents[m].value + '}\' required=\'' + layoutItems[l].required + '\' tabOrderHint=\'' + layoutComponents[m].tabOrder + '\' onkeypress=\'noenter(event)\'>\\n\\t\\t\\t\\t\\t<apex:actionSupport event=\'onkeyup\' rerender=\'pg\'/>\\n\\t\\t\\t\\t</apex:inputField>';
 												}
 											}
