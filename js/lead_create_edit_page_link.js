@@ -89,12 +89,16 @@ for (var i = 0; i < layoutActivity.length; i++) {
 										body += '\\n\\t\\t\\t\\t<apex:inputField value=\'\{\!Lead.firstName}\' required=\'false\' tabOrderHint=\'' + layoutComponents[m].tabOrder + '\' onkeypress=\'noenter(event)\'>\\n\\t\\t\\t\\t\\t<apex:actionSupport event=\'onkeyup\' rerender=\'pg\'/>\\n\\t\\t\\t\\t</apex:inputField>\\n\\t\\t\\t\\t<apex:pageBlockSectionItem></apex:pageBlockSectionItem>\\n\\t\\t\\t\\t<apex:inputField value=\'\{\!Lead.lastName}\' required=\'' + layoutItems[l].required + '\' tabOrderHint=\'' + layoutComponents[m].tabOrder + '\' onkeypress=\'noenter(event)\' styleClass=\'reqClass\'>\\n\\t\\t\\t\\t\\t<apex:actionSupport event=\'onkeyup\' rerender=\'pg\'/>\\n\\t\\t\\t\\t\\t<div id=\'div' + divNum + '\' style=\'color:#d74c3b;display:none;\' class=\'errorMsg\'>Error: You must enter a value</div>\\n\\t\\t\\t\\t</apex:inputField>'
 									} else {
 										if (detailLayoutSection[j].columns == 1 && layoutComponents[m].displayLines > 1 && field.type=='textarea') {
+											var idVal = 'id_'+a[layoutItems[l].label];
+											if(idVal=='id_undefined'){
+												idVal = 'id_'+countUndefined;
+												countUndefined++;
+											}
+
 											if (layoutItems[l].required == 'true') {
 												divNum++;
-												var idVal = 'id_'+a[layoutItems[l].label];
 												body += '\\n\\t\\t\\t\\t<apex:inputField id=\''+idVal+'\' value=\'\{\!Lead.' + layoutComponents[m].value + '}\' required=\'' + layoutItems[l].required + '\' tabOrderHint=\'' + layoutComponents[m].tabOrder + '\' style=\'width:473px;height:50px;\' onkeypress=\'noenter(event)\' styleClass=\'reqClass\'>\\n\\t\\t\\t\\t\\t<apex:actionSupport event=\'onkeyup\' rerender=\'pg\'/>\\n\\t\\t\\t\\t\\t<div id=\'div' + divNum + '\' style=\'color:#d74c3b;display:none;\' class=\'errorMsg\'>Error: You must enter a value</div>\\n\\t\\t\\t\\t</apex:inputField>';
 											} else {
-												var idVal = 'id_'+a[layoutItems[l].label];
 												body += '\\n\\t\\t\\t\\t<apex:inputField id=\''+idVal+'\' value=\'\{\!Lead.' + layoutComponents[m].value + '}\' required=\'' + layoutItems[l].required + '\' tabOrderHint=\'' + layoutComponents[m].tabOrder + '\' style=\'width:473px;height:50px;\' onkeypress=\'noenter(event)\'>\\n\\t\\t\\t\\t\\t<apex:actionSupport event=\'onkeyup\' rerender=\'pg\'/>\\n\\t\\t\\t\\t</apex:inputField>';
 											}
 										} else {
@@ -104,8 +108,8 @@ for (var i = 0; i < layoutActivity.length; i++) {
 												var idVal = 'id_'+a[layoutItems[l].label];
 												if(idVal=='id_undefined'){
 													idVal = 'id_'+countUndefined;
+													countUndefined++;
 												}
-												countUndefined++;
 												if (layoutItems[l].required == 'true') {
 													divNum++;
 													body += '\\n\\t\\t\\t\\t<apex:inputField id=\''+idVal+'\' value=\'\{\!Lead.' + layoutComponents[m].value + '}\' required=\'' + layoutItems[l].required + '\' tabOrderHint=\'' + layoutComponents[m].tabOrder + '\' onkeypress=\'noenter(event)\' styleClass=\'reqClass\'>\\n\\t\\t\\t\\t\\t<apex:actionSupport event=\'onkeyup\' rerender=\'pg\'/>\\n\\t\\t\\t\\t\\t<div id=\'div' + divNum + '\' style=\'color:#d74c3b;display:none;\' class=\'errorMsg\'>Error: You must enter a value</div>\\n\\t\\t\\t\\t</apex:inputField>';
