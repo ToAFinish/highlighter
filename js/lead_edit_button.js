@@ -1,5 +1,5 @@
-{!REQUIRESCRIPT("/soap/ajax/39.0/connection.js")} 
-{!REQUIRESCRIPT("/soap/ajax/39.0/apex.js")} 
+{!REQUIRESCRIPT("/soap/ajax/51.0/connection.js")} 
+{!REQUIRESCRIPT("/soap/ajax/51.0/apex.js")} 
 var SesId = '{!GETSESSIONID()}';
 var result;
 var ObjectName = 'Lead';
