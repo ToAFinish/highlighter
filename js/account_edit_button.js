@@ -1,5 +1,5 @@
-{!REQUIRESCRIPT("/soap/ajax/39.0/connection.js")} 
-{!REQUIRESCRIPT("/soap/ajax/39.0/apex.js")} 
+{!REQUIRESCRIPT("/soap/ajax/51.0/connection.js")} 
+{!REQUIRESCRIPT("/soap/ajax/51.0/apex.js")} 
 var SesId = '{!GETSESSIONID()}';
 var result;
 var ObjectName = 'Account';
@@ -34,7 +34,7 @@ if (pgId != null && pgId != '') {
     var qry = sforce.connection.query("SELECT Id, Parent.Name, Parent.Profile.Name, Parent.Profile.Id FROM SetupEntityAccess WHERE Parent.Profile.Id = '{!$User.ProfileId}' AND SetupEntityId in (SELECT Id FROM ApexPage WHERE Name = '" + pageName + "' AND (NamespacePrefix = 'highlighter' OR NamespacePrefix=''))");
     recordsArr = qry.getArray("records");
     if (recordsArr.length == 1) {
-        var loc = '/apex/' + pageName + '?id={!Account.Id}';
+        var loc = '/apex/c__' + pageName + '?id={!Account.Id}';
         window.open(loc, '_self');
     } else {
         var loc = '/{!Account.Id}/e?retURL={!Account.Id}';
