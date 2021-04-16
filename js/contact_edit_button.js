@@ -34,7 +34,7 @@ if (pgId != null && pgId != '') {
     var qry = sforce.connection.query("SELECT Id, Parent.Name, Parent.Profile.Name, Parent.Profile.Id FROM SetupEntityAccess WHERE Parent.Profile.Id = '{!$User.ProfileId}' AND SetupEntityId in (SELECT Id FROM ApexPage WHERE Name = '" + pageName + "' AND (NamespacePrefix = 'highlighter' OR NamespacePrefix=''))");
     recordsArr = qry.getArray("records");
     if (recordsArr.length == 1) {
-        var loc = '/apex/' + pageName + '?id={!Contact.Id}';
+        var loc = '/apex/c__' + pageName + '?id={!Contact.Id}';
         window.open(loc, '_self');
     } else {
         var loc = '/{!Contact.Id}/e?retURL={!Contact.Id}';
